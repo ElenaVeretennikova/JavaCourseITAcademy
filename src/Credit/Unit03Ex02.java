@@ -22,7 +22,7 @@ public class Unit03Ex02 {
                 if (isFebruary(month) || is30daysMonth(month)) {
                     return "Проверьте введенные данные";
                 }
-                if (is31daysMonth(month)) {
+                if (is31daysMonthExcludeDecember(month)) {
                     day = 1;
                     month++;
                 }
@@ -36,7 +36,7 @@ public class Unit03Ex02 {
                 if (isFebruary(month)) {
                     return "Проверьте введенные данные";
                 }
-                if (is31daysMonth(month)||isDecember(month)) {
+                if (is31daysMonthExcludeDecember(month)||isDecember(month)) {
                     day++;
                 } else {
                     day = 1;
@@ -75,7 +75,7 @@ public class Unit03Ex02 {
         return month == 4 || month == 6 || month == 9 || month == 11;
     }
 
-    public static boolean is31daysMonth(int month) {
+    public static boolean is31daysMonthExcludeDecember(int month) {
         return month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10;
     }
 
