@@ -4,33 +4,38 @@ import java.util.Scanner;
 
 public class Ex1 {
 
+    public static final int SEC_NUMBER_IN_WEEK = 604800;
+    public static final int SEC_NUMBER_IN_DAY = 86400;
+    public static final int SEC_NUMBER_IN_HOUR = 3600;
+    public static final int SEC_NUMBER_IN_MINUTE = 60;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int secondsCount = scanner.nextInt();
         String resultTime = "";
-        if (secondsCount >= 604800) {
-            int weeksCount = secondsCount / 604800;
+        if (secondsCount >= SEC_NUMBER_IN_WEEK) {
+            int weeksCount = secondsCount / SEC_NUMBER_IN_WEEK;
             String weekName = getWeeksName(weeksCount);
             resultTime = weeksCount + " " + weekName + " ";
-            secondsCount = secondsCount % 604800;
+            secondsCount = secondsCount % SEC_NUMBER_IN_WEEK;
         }
-        if (secondsCount >= 86400) {
-            int daysCount = secondsCount / 86400;
+        if (secondsCount >= SEC_NUMBER_IN_DAY) {
+            int daysCount = secondsCount / SEC_NUMBER_IN_DAY;
             String dayName = getDaysName(daysCount);
             resultTime = resultTime + daysCount + " " + dayName + " ";
-            secondsCount = secondsCount % 86400;
+            secondsCount = secondsCount % SEC_NUMBER_IN_DAY;
         }
-        if (secondsCount >= 3600) {
-            int hoursCount = secondsCount / 3600;
+        if (secondsCount >= SEC_NUMBER_IN_HOUR) {
+            int hoursCount = secondsCount / SEC_NUMBER_IN_HOUR;
             String hourName = getHoursName(hoursCount);
             resultTime = resultTime + hoursCount + " " + hourName + " ";
-            secondsCount = secondsCount % 3600;
+            secondsCount = secondsCount % SEC_NUMBER_IN_HOUR;
         }
-        if (secondsCount >= 60) {
-            int minutesCount = secondsCount / 60;
+        if (secondsCount >= SEC_NUMBER_IN_MINUTE) {
+            int minutesCount = secondsCount / SEC_NUMBER_IN_MINUTE;
             String minuteName = getMinutesName(minutesCount);
             resultTime = resultTime + minutesCount + " " + minuteName + " ";
-            secondsCount = secondsCount % 60;
+            secondsCount = secondsCount % SEC_NUMBER_IN_MINUTE;
         }
         String secondName = getSecondsName(secondsCount);
         resultTime = resultTime + secondsCount + " " + secondName + " ";
@@ -73,18 +78,26 @@ public class Ex1 {
     }
 
     private static String getMinutesName(int count) {
-        return switch (count) {
-            case 1, 21, 31, 41, 51 -> "минута";
-            case 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54 -> "минуты";
-            default -> "минут";
-        };
+        if (count > 0 && count <= 10 || count >= 15 && count <= 59) {
+            return switch (count % 10) {
+                case 1 -> "минута";
+                case 2, 3, 4 -> "минуты";
+                default -> "минут";
+            };
+        } else {
+            return "минут";
+        }
     }
 
     private static String getSecondsName(int count) {
-        return switch (count) {
-            case 1, 21, 31, 41, 51 -> "секунда";
-            case 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54 -> "секунды";
-            default -> "секунд";
-        };
+        if (count > 0 && count <= 10 || count >= 15 && count <= 59) {
+            return switch (count % 10) {
+                case 1 -> "секунда";
+                case 2, 3, 4 -> "секунды";
+                default -> "секунд";
+            };
+        } else {
+            return "секунд";
+        }
     }
 }
