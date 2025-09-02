@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Unit12Ex11 {
 
@@ -29,12 +30,7 @@ public class Unit12Ex11 {
     public static String readFile(String filename) {
         String result = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            StringBuilder incomeText = new StringBuilder();
-            String str1;
-            while ((str1 = reader.readLine()) != null) {
-                incomeText.append(str1);
-            }
-            result = incomeText.toString();
+            result = reader.lines().collect(Collectors.joining());
         } catch (IOException e) {
             e.printStackTrace();
         }
