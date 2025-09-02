@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Unit12Ex12 {
 
@@ -32,12 +33,8 @@ public class Unit12Ex12 {
     public static List<String> readFile(String filename) {
         List<String> resultBinaryList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            StringBuilder incomeText = new StringBuilder();
-            String str1;
-            while ((str1 = reader.readLine()) != null) {
-                incomeText.append(str1);
-            }
-            resultBinaryList = (Arrays.asList((incomeText.toString()).split("\\s+")));
+            String result = reader.lines().collect(Collectors.joining());
+            resultBinaryList = Arrays.asList(result.split("\\s+"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,6 +55,6 @@ public class Unit12Ex12 {
             System.out.print((Integer.parseInt(bin, 2)) + " ");
         }
         System.out.println();
-        System.out.println("Среднне арифметическое всех чисел: " + arithmeticMean);
+        System.out.println("Среднее арифметическое всех чисел: " + arithmeticMean);
     }
 }
