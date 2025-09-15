@@ -20,4 +20,9 @@ public class Car implements Serializable {
     public int getEngineCapacity() {
         return engineCapacity;
     }
+
+    @Override
+    public String toString() {
+        return "<" + name + ">" + " : <" + carModel +"> : <" + engineCapacity + ">";
+    }
 }
