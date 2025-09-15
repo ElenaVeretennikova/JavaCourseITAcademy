@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 
 public class PlayerGeneratorTask implements Callable<String> {
 
-    public String filename;
+    private String filename;
 
     @Override
     public String call() {
